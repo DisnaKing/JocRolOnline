@@ -10,13 +10,12 @@ public class Jugador {
     private int puntsDefensa;
     private int vides;
     private Equip equip;
-    public Jugador(String nom, int puntsAtac, int puntsDefensa, int vides,Equip equip){
+    public Jugador(String nom, int puntsAtac, int puntsDefensa, int vides){
         System.out.println("Sóc el constructor de personatges Jugador pero estic creant un "+this.getClass().getSimpleName());
         this.nom = nom;
         this.puntsAtac=puntsAtac;
         this.puntsDefensa=puntsDefensa;
         this.vides=vides;
-        this.equip=equip;
 
     }
 
@@ -51,11 +50,17 @@ public class Jugador {
     }
 
     public void setEquip(Equip equip) {
-        this.equip = equip;
+        if (equip==null && this.equip!=null) { // TODO el metode no te final ja que les funcions que crida criden a aquesta
+            this.equip=null;
+            equip.lleva(this);
+        } else if (equip!=null){
+            this.equip=equip;
+            equip.posa(this);
+        }
     }
 
     public String toString() {
-        return this.nom+"["+this.equip+"]("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")";
+        return this.nom+" [ "+this.equip.getNom()+" ] ("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")";
     }
 
 

@@ -3,8 +3,8 @@ package personatges;
 import Altres.Equip;
 
 public class Guerrer extends Huma { // Poden aguantar més ferides que la resta de jugadors
-    public Guerrer(String nom, int puntsAtac, int puntsDefensa, int vides, Equip equip){
-        super(nom,puntsAtac,puntsDefensa,vides,equip);
+    public Guerrer(String nom, int puntsAtac, int puntsDefensa, int vides){
+        super(nom,puntsAtac,puntsDefensa,vides);
         System.out.println("Sóc el constructor de personatges Guerrer pero estic creant un "+this.getClass().getSimpleName());
     }
     public void esColpejatAmb(int puntsDefensa, int puntsAtac){

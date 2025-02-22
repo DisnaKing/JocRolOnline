@@ -11,9 +11,14 @@ public class JocDeRol {
     private static void provaFase4(){
         Equip e1=new Equip("ELs peps");
         Equip e2=new Equip("Jaimitos");
-        Huma h1 = new Huma("Guillem",40,20,150,e1);
-        Alien a1 = new Alien("Andy",40,20,70,e1);
-        Guerrer g1 = new Guerrer("Andreu",40,35,150,e2);
-        System.out.println(h1);
+        Huma h1 = new Huma("Guillem",40,20,150);
+        Alien a1 = new Alien("Andy",40,20,70);
+        Guerrer g1 = new Guerrer("Andreu",40,35,150);
+        e1.posa(h1);
+        e1.posa(a1);
+        e2.posa(g1);
+        System.out.println(e1);
+        e1.lleva(a1);
+        System.out.println(e1);
     }
 }

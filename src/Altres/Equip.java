@@ -14,24 +14,31 @@ public class Equip {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public ArrayList<Jugador> getMembres() {
+        return membres;
     }
     public void posa(Jugador Player){
         if(!membres.contains(Player)){
             membres.add(Player);
-            System.out.println("Jugador afegit al equip");
+            Player.setEquip(this);
         }
-        else {System.out.println("El jugador ja esta a l'equip");}
+        else {System.out.println(Player.getNom()+ " ja esta a l'equip");}
     }
     public void lleva(Jugador Player){
-        if(membres.contains(Player)){
+        if(membres.contains(Player) && Player.getEquip()!=null){
             membres.remove(Player);
-            System.out.println("Jugador expulsat");
+            Player.setEquip(null);
+        }else if(Player.getEquip()==null) {
+            System.out.println(Player+" eliminat de l'equip");
         }
-        else {System.out.println("El jugador no pertany al equip");}
+        else {System.out.println(Player+ " no pertany al equip");}
     }
+// TODO Separar els membres en diferents files
     public String toString() {
-        return "Equip "+this.nom+" :\n\t- "+membres.toString();
+        String membres = "";
+        for(int i=0;i<this.getMembres().size();i++){
+            membres+="\t- "+this.getMembres().get(i).toString()+"\n";
+        }
+        return "Equip "+this.nom+" :\n"+ membres;
     }
 }
