@@ -18,20 +18,22 @@ public class Equip {
         return membres;
     }
     public void posa(Jugador Player){
-        if(!membres.contains(Player)){
+        if(! membres.contains(Player)){
             membres.add(Player);
             Player.setEquip(this);
         }
         else {System.out.println(Player.getNom()+ " ja esta a l'equip");}
     }
-    public void lleva(Jugador Player){
-        if(membres.contains(Player) && Player.getEquip()!=null){
-            membres.remove(Player);
-            Player.setEquip(null);
-        }else if(Player.getEquip()==null) {
-            System.out.println(Player+" eliminat de l'equip");
+    public void lleva(Jugador player) {
+        if (membres.contains(player)) {
+            membres.remove(player);
+            if (player.getEquip() == this) { // Assegurar-se que el jugador pertany a aquest equip
+                player.setEquip(null);
+                System.out.println(player.getNom() + " ha sigut eliminat de l'equip " + this.getNom());
+            }
+        } else {
+            System.out.println(player.getNom() + " no pertany a aquest equip");
         }
-        else {System.out.println(Player+ " no pertany al equip");}
     }
 // TODO Separar els membres en diferents files
     public String toString() {

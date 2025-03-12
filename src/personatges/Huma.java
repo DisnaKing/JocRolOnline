@@ -1,7 +1,5 @@
 package personatges;
 
-import Altres.Equip;
-
 public class Huma extends Jugador {    // No tenen bonificacions en defensa i atac
     public Huma(String nom, int puntsAtac, int puntsDefensa, int vides) {
         super(nom, puntsAtac, puntsDefensa, vides);

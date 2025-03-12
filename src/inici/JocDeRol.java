@@ -1,6 +1,7 @@
 package inici;
 
 import Altres.Equip;
+import Altres.Poders;
 import personatges.*;
 
 public class JocDeRol {
@@ -14,11 +15,29 @@ public class JocDeRol {
         Huma h1 = new Huma("Guillem",40,20,150);
         Alien a1 = new Alien("Andy",40,20,70);
         Guerrer g1 = new Guerrer("Andreu",40,35,150);
+        Poders p1 = new Poders("BufoVida",5,0);
+        Poders p2 = new Poders("bufoDeff",0,5);
+        Poders p3 = new Poders("pyroBlast",10,-5);
+
+        // Afegir poders
+        h1.posa(p1);
+        g1.posa(p2);
+        a1.posa(p3);
+
+        // Afegir jugadors als equips
         e1.posa(h1);
         e1.posa(a1);
         e2.posa(g1);
+
+        // Es realitzen els atacs
+        a1.ataca(g1);
+        a1.ataca(h1);
+        a1.ataca(g1);
+        a1.ataca(h1);
+
+        // Eliminacio dels quips
         System.out.println(e1);
-        e1.lleva(a1);
+        h1.setEquip(null);
         System.out.println(e1);
     }
 }

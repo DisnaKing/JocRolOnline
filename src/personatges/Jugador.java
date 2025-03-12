@@ -1,7 +1,8 @@
 package personatges;
 
-import Altres.Equip;
+import Altres.*;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Jugador {
@@ -10,6 +11,7 @@ public class Jugador {
     private int puntsDefensa;
     private int vides;
     private Equip equip;
+    private ArrayList<Poders> poders;
     public Jugador(String nom, int puntsAtac, int puntsDefensa, int vides){
         System.out.println("Sóc el constructor de personatges Jugador pero estic creant un "+this.getClass().getSimpleName());
         this.nom = nom;
@@ -49,18 +51,32 @@ public class Jugador {
         return equip;
     }
 
+    public ArrayList<Poders> getPoders() {
+        return poders;
+    }
+
     public void setEquip(Equip equip) {
-        if (equip==null && this.equip!=null) { // TODO el metode no te final ja que les funcions que crida criden a aquesta
-            this.equip=null;
-            equip.lleva(this);
-        } else if (equip!=null){
-            this.equip=equip;
+        if (equip == null) {
+            if (this.equip != null) {
+                Equip oldEquip = this.equip; // Evitar referències incorrectes
+                this.equip = null;
+                oldEquip.lleva(this); // Elimina de l'antic equip
+                System.out.println(this.getNom()+" ha segut eliminat de l'equip "+oldEquip.getNom()+"\n");
+            } else {
+                System.out.println("Equip eliminat");
+            }
+        } else {
+            if (this.equip != null) { // Si ja té un equip, eliminar-lo primer
+                this.equip.lleva(this);
+            }
+            this.equip = equip;
             equip.posa(this);
+            System.out.println(this.getNom() + " s'ha unit a l'equip " + equip.getNom());
         }
     }
 
     public String toString() {
-        return this.nom+" [ "+this.equip.getNom()+" ] ("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")";
+        return this.nom+" [ "+this.equip.getNom()+" ] ("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")\n\t- "+this.getPoders();
     }
 
 
@@ -79,20 +95,45 @@ public class Jugador {
      * Ataca a un jugador
      * @param player jugador al que ataca
      */
-    public void ataca(Jugador player){
+    public void ataca(Jugador player) {
+        int pa = getPuntsAtac();
+        int pd = getPuntsDefensa();
+        int sumaPaPodersJ1 = 0;
+        for (Poders poder : this.getPoders()) {
+            sumaPaPodersJ1 += poder.getBonusAtac();
+        }
+        int sumaPaPodersJ2 = 0;
+        for (Poders poder : player.getPoders()) {
+            sumaPaPodersJ2 += poder.getBonusAtac();
+        }
+        int sumaPdPodersJ1 = 0;
+        for (Poders poder : this.getPoders()) {
+            sumaPdPodersJ1 += poder.getBonusDefensa();
+        }
+        int sumaPdPodersJ2 = 0;
+        for (Poders poder : player.getPoders()) {
+            sumaPdPodersJ2 += poder.getBonusDefensa();
+        }
         System.out.println("----- ABANS DE L'ATAC ------"); // Stats abans de l'atac
         System.out.println(this);
         System.out.println(player.toString());
         System.out.println("----- Atac -----"); // Ataquen els dos Jugadors
-        player.esColpejatAmb(player.puntsDefensa,this.puntsAtac);
-        this.esColpejatAmb(this.getPuntsDefensa(), player.puntsAtac);
+        player.esColpejatAmb(sumaPdPodersJ2, sumaPaPodersJ1 + pa);
+        this.esColpejatAmb(sumaPdPodersJ1 + pd, sumaPaPodersJ2);
         System.out.println("----- DESPRES DE L'ATAC -----"); // Stats després de l'atac
-        System.out.println("Atacant: "+this);
-        System.out.println("Atacat: "+player);
+        System.out.println("Atacant: " + this);
+        System.out.println("Atacat: " + player);
     }
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Jugador jugador = (Jugador) o;
         return puntsAtac == jugador.puntsAtac && puntsDefensa == jugador.puntsDefensa && vides == jugador.vides && Objects.equals(nom, jugador.nom) && Objects.equals(equip, jugador.equip);
+    }
+
+    public void posa(Poders poder){
+        this.poders.add(poder);
+    }
+    public void lleva(Poders poder){
+        this.poders.remove(poder);
     }
 }

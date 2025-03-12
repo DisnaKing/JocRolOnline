@@ -7,6 +7,7 @@ public class Guerrer extends Huma { // Poden aguantar més ferides que la resta 
         super(nom,puntsAtac,puntsDefensa,vides);
         System.out.println("Sóc el constructor de personatges Guerrer pero estic creant un "+this.getClass().getSimpleName());
     }
+    @Override
     public void esColpejatAmb(int puntsDefensa, int puntsAtac){
         int menosVides = Math.max((puntsAtac - this.getPuntsDefensa()), 0);
         if (menosVides>5){
