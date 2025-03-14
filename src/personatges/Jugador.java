@@ -13,11 +13,13 @@ public class Jugador {
     private Equip equip;
     private ArrayList<Poders> poders;
     public Jugador(String nom, int puntsAtac, int puntsDefensa, int vides){
+
         System.out.println("Sóc el constructor de personatges Jugador pero estic creant un "+this.getClass().getSimpleName());
         this.nom = nom;
         this.puntsAtac=puntsAtac;
         this.puntsDefensa=puntsDefensa;
         this.vides=vides;
+        this.poders = new ArrayList<>();
 
     }
 
@@ -76,7 +78,11 @@ public class Jugador {
     }
 
     public String toString() {
-        return this.nom+" [ "+this.equip.getNom()+" ] ("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")\n\t- "+this.getPoders();
+        String poders = "";
+        for (Poders poder : this.getPoders()){
+            poders+="\t- "+poder+"\n";
+        }
+        return this.nom+" [ "+this.equip.getNom()+" ] ("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")\n"+poders;
     }
 
 

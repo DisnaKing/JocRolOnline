@@ -24,7 +24,7 @@ public class Poders {
     }
 
     public String toString(){
-        return this.nom+" (BA:"+this.bonusAtac+", BD:"+this.bonusDefensa+" )";
+        return this.nom+" (BA:"+this.bonusAtac+", BD:"+this.bonusDefensa+")";
     }
 }
 

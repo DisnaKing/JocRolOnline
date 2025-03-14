@@ -21,6 +21,7 @@ public class JocDeRol {
 
         // Afegir poders
         h1.posa(p1);
+        h1.posa(p2);
         g1.posa(p2);
         a1.posa(p3);
 
@@ -29,15 +30,6 @@ public class JocDeRol {
         e1.posa(a1);
         e2.posa(g1);
 
-        // Es realitzen els atacs
-        a1.ataca(g1);
-        a1.ataca(h1);
-        a1.ataca(g1);
-        a1.ataca(h1);
-
-        // Eliminacio dels quips
-        System.out.println(e1);
-        h1.setEquip(null);
-        System.out.println(e1);
+        System.out.println(h1);
     }
 }
