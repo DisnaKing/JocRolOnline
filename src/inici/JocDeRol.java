@@ -1,35 +1,50 @@
 package inici;
+import teclat.Teclat;
 
-import Altres.Equip;
-import Altres.Poders;
-import personatges.*;
 
 public class JocDeRol {
     public static void main(String[] args) {
-        provaFase4();
+        int opcio = -1;
+        while (opcio != 0){
+            System.out.println("JOC DE ROL\n1. Configuracio\n2. Jugar\n0. Sortir");
+            opcio=Teclat.scInt();
+            switch (opcio){
+                case 1:
+                    menuConfiguracio();
+                    break;
+                case 0:
+                    System.out.println("Sortint del joc de rol");
+                    break;
+                default:
+                    System.out.println("Opcio incorrecta");
+                    break;
+            }
+        }
+    }
+    static public void menuConfiguracio(){
+        int opcio = -1;
+        while (opcio != 0) {
+            System.out.println("CONFIGURACIO\n1. Jugadors\n2. Equips\n3. Poders\n0. Sortir");
+            opcio = Teclat.scInt();
+            switch (opcio){
+                case 1:
+                    Jugadors.menu();
+                    break;
+                case 2:
+                    Equips.menu();
+                    break;
+                case 3:
+                    Poders.menu();
+                    break;
+                case 0:
+                    System.out.println("Sortint de la configuracio");
+                    break;
+                default:
+                    System.out.println("Opcio incorrecta");
+                    break;
+            }
+        }
+
     }
 
-    private static void provaFase4(){
-        Equip e1=new Equip("ELs peps");
-        Equip e2=new Equip("Jaimitos");
-        Huma h1 = new Huma("Guillem",40,20,150);
-        Alien a1 = new Alien("Andy",40,20,70);
-        Guerrer g1 = new Guerrer("Andreu",40,35,150);
-        Poders p1 = new Poders("BufoVida",5,0);
-        Poders p2 = new Poders("bufoDeff",0,5);
-        Poders p3 = new Poders("pyroBlast",10,-5);
-
-        // Afegir poders
-        h1.posa(p1);
-        h1.posa(p2);
-        g1.posa(p2);
-        a1.posa(p3);
-
-        // Afegir jugadors als equips
-        e1.posa(h1);
-        e1.posa(a1);
-        e2.posa(g1);
-
-        System.out.println(h1);
-    }
 }
