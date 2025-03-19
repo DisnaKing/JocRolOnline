@@ -3,7 +3,7 @@ package inici;
 import java.util.ArrayList;
 
 public class Poders {
-    static ArrayList<Altres.Poders>llistaPoders;
+    static ArrayList<Altres.Poders>llistaPoders = new ArrayList<>();
 
     public static void menu(){
         int opcio=-1;

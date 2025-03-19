@@ -1,12 +1,15 @@
 package inici;
 
+import personatges.Alien;
+import personatges.Guerrer;
+import personatges.Huma;
 import personatges.Jugador;
 import teclat.Teclat;
 
 import java.util.ArrayList;
 
 public class Jugadors {
-    static ArrayList<Jugador>llistaJugadors;
+    static ArrayList<Jugador> llistaJugadors = new ArrayList<>();
 
     public static void menu(){
         int opcio;
@@ -83,15 +86,43 @@ public class Jugadors {
     }
 
     public static void crear(){
+        int videsInicials=200;
+        System.out.println("Tipus de jugador (H,G,A): ");
+        String tipus=Teclat.scString();
+        tipus=tipus.toUpperCase();
         System.out.println("Nom del jugador:");
         String nom=Teclat.scString();
         System.out.println("Punts d'atac:");
         int pa=Teclat.scInt();
-        System.out.println("Punts de defensa:");
-        int pd=Teclat.scInt();
-        System.out.println("Vides:");
-        int vides=Teclat.scInt();
-        Jugador player = new Jugador(nom,pa,pd,vides);
-        llistaJugadors.add(player);
+        int pd = 100-pa;
+        if (pd<0){
+            pd=0;
+        }
+
+        switch (tipus){
+            case "H":
+                Huma nowHuma = new Huma(nom,pa,pd,videsInicials);
+                if (! llistaJugadors.contains(nowHuma)){
+                    llistaJugadors.add(nowHuma);
+                }
+
+                break;
+            case "G":
+                Guerrer nowGuerrer = new Guerrer(nom,pa,pd,videsInicials);
+                if (! llistaJugadors.contains(nowGuerrer)){
+                    llistaJugadors.add(nowGuerrer);
+                }
+                break;
+            case "A":
+                Alien nowAlien = new Alien(nom,pa,pd,videsInicials);
+                if (! llistaJugadors.contains(nowAlien)){
+                    llistaJugadors.add(nowAlien);
+                }
+                break;
+            default:
+                System.out.println("Tipus de jugador incorrecte");
+                break;
+        }
+
     }
 }

@@ -5,7 +5,7 @@ import teclat.Teclat;
 import java.util.ArrayList;
 
 public class Equips {
-    static ArrayList<Equip>llistaEquips;
+    static ArrayList<Equip>llistaEquips = new ArrayList<>();
 
     public static void menu(){
         int opcio=-1;
