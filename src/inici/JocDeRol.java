@@ -12,6 +12,9 @@ public class JocDeRol {
                 case 1:
                     menuConfiguracio();
                     break;
+                case 2:
+                    menuJugar();
+                    break;
                 case 0:
                     System.out.println("Sortint del joc de rol");
                     break;
@@ -21,6 +24,7 @@ public class JocDeRol {
             }
         }
     }
+
     static public void menuConfiguracio(){
         int opcio = -1;
         while (opcio != 0) {
