@@ -78,11 +78,17 @@ public class Jugador {
     }
 
     public String toString() {
-        String poders = "";
+        StringBuilder poders = new StringBuilder();
         for (Poders poder : this.getPoders()){
-            poders+="\t- "+poder+"\n";
+            poders.append("\t- ").append(poder).append("\n");
         }
-        return this.nom+" [ "+this.equip.getNom()+" ] ("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")\n"+poders;
+        String equip;
+        if(this.equip==null){
+            equip = "Sense equip";
+        }else{
+            equip = this.equip.getNom();
+        }
+        return this.nom+" [ "+equip+" ] ("+this.getClass().getSimpleName()+", PA:"+this.puntsAtac+" , PD:"+this.puntsDefensa+" , PV:"+this.vides+")\n"+poders;
     }
 
 

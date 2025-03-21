@@ -10,6 +10,7 @@ public class Poders {
         do {
             System.out.println("PODERS\n1. Crear\n2. Consultar\n3. Eliminar\n0. Eixir");
             opcio=teclat.Teclat.scInt();
+            JocDeRol.clearConsole();
             switch (opcio){
                 case 1:
                     crear();
@@ -32,13 +33,15 @@ public class Poders {
     public static void eliminar(){
         System.out.println("Quin poder vols eliminar?");
         consultar();
-        int opcio=teclat.Teclat.scInt();
+        int opcio=teclat.Teclat.scInt()-1;
         llistaPoders.remove(opcio);
     }
 
     public static void consultar(){
-        for (int i=0;i<llistaPoders.size();i++){
-            System.out.println(i+". "+llistaPoders.get(i));
+        int i=1;
+        for (Altres.Poders poder : llistaPoders){
+            System.out.println(i+" - "+poder);
+            i++;
         }
     }
 

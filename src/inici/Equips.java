@@ -1,6 +1,7 @@
 package inici;
 
 import Altres.Equip;
+import personatges.Jugador;
 import teclat.Teclat;
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class Equips {
         do {
             System.out.println("EQUIPS\n1. Crear\n2. Consultar\n3. Eliminar\n0. Eixir");
             opcio=Teclat.scInt();
+            JocDeRol.clearConsole();
             switch (opcio){
                 case 1:
                     crear();
@@ -35,13 +37,15 @@ public class Equips {
     public static void  eliminar(){
         System.out.println("Quin equip vols eliminar?");
         consultar();
-        int opcio=Teclat.scInt();
+        int opcio=Teclat.scInt()-1;
         llistaEquips.remove(opcio);
     }
 
     public static void consultar(){
-        for (int i=0;i<llistaEquips.size();i++){
-            System.out.println(i+". "+llistaEquips.get(i));
+        int i=1;
+        for (Equip equip : llistaEquips){
+            System.out.println(i+" - "+equip);
+            i++;
         }
     }
 
