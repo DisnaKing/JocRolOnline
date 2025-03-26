@@ -35,11 +35,10 @@ public class Equip {
             System.out.println(player.getNom() + " no pertany a aquest equip");
         }
     }
-// TODO Separar els membres en diferents files
     public String toString() {
-        String membres = "";
+        StringBuilder membres = new StringBuilder();
         for(int i=0;i<this.getMembres().size();i++){
-            membres+="\t- "+this.getMembres().get(i).toString()+"\n";
+            membres.append("\t- ").append(this.getMembres().get(i).toString());
         }
         return "Equip "+this.nom+" :\n"+ membres;
     }

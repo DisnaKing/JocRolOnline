@@ -1,15 +1,21 @@
 package inici;
 import Altres.Equip;
 import personatges.Alien;
+import personatges.Huma;
+import personatges.Jugador;
 import teclat.Teclat;
+
+import java.util.Random;
 
 
 public class JocDeRol {
     public static void main(String[] args) {
         clearConsole();
-        Alien pepe = new Alien("Pepe", 10, 5, 100);
+        Alien pepe = new Alien("Pepe", 100, 5, 100);
+        Huma guillem = new Huma("Guillem", 10, 0, 100);
         Equip pacos = new Equip("Pacos");
         Jugadors.llistaJugadors.add(pepe);
+        Jugadors.llistaJugadors.add(guillem);
         Equips.llistaEquips.add(pacos);
         int opcio = -1;
         while (opcio != 0){
@@ -43,8 +49,9 @@ public class JocDeRol {
 
     public static void automatitzat(){
         while (Jugadors.llistaJugadors.size()>1){
-            int atacantRandom =(int) (Math.random()*(1-Jugadors.llistaJugadors.size()));
-            int atacatRandom =(int) (Math.random()*(1-Jugadors.llistaJugadors.size()));
+            Random rand = new Random();
+            int atacantRandom = rand.nextInt(Jugadors.llistaJugadors.size());
+            int atacatRandom = rand.nextInt(Jugadors.llistaJugadors.size());
             if (atacantRandom!=atacatRandom){
                 if (Jugadors.llistaJugadors.get(atacantRandom).getVides()>0){
                     Jugadors.llistaJugadors.remove(atacantRandom);
@@ -61,7 +68,36 @@ public class JocDeRol {
     }
 
     public static void manual(){
+        while (Jugadors.llistaJugadors.size()>1){
+            for (int i = 0; i < Jugadors.llistaJugadors.size(); i++) {
+                Jugador atacant = Jugadors.llistaJugadors.get(i);
+                Jugador atacat = atacant;
 
+                while (atacant.equals(atacat)) {
+                    System.out.println(atacant + " a qui vols atacar?");
+                    Jugadors.consultar();
+                    atacant = Jugadors.llistaJugadors.get(Teclat.scInt() - 1);
+                }
+                // Comprovar que no hi ha ningun jugador eliminat
+                comprovarVides(atacant,atacat);
+                // Atac
+                try {atacant.ataca(atacat);} catch (Exception _) {}
+                // Comprovar que no hi ha ningun jugador eliminat
+                comprovarVides(atacant,atacat);
+
+                if (Jugadors.llistaJugadors.size()==1){
+                    System.out.println("El guanyador es: "+Jugadors.llistaJugadors.getFirst());
+                }
+            }
+        }
+    }
+    public static void comprovarVides(Jugador atacant, Jugador atacat){
+        if (atacant.getVides()<=0){
+            Jugadors.llistaJugadors.remove(atacant);
+        }
+        if (atacat.getVides()<=0){
+            Jugadors.llistaJugadors.remove(atacat);
+        }
     }
 
     static public void menuJugar(){

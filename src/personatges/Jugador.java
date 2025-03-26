@@ -99,13 +99,12 @@ public class Jugador {
         this.vides-=menosVides;
     }
 
+
     /**
      * Ataca a un jugador
      * @param player jugador al que ataca
      */
     public void ataca(Jugador player) {
-        int pa = getPuntsAtac();
-        int pd = getPuntsDefensa();
         int sumaPaPodersJ1 = 0;
         for (Poders poder : this.getPoders()) {
             sumaPaPodersJ1 += poder.getBonusAtac();
@@ -124,10 +123,10 @@ public class Jugador {
         }
         System.out.println("----- ABANS DE L'ATAC ------"); // Stats abans de l'atac
         System.out.println(this);
-        System.out.println(player.toString());
-        System.out.println("----- Atac -----"); // Ataquen els dos Jugadors
-        player.esColpejatAmb(sumaPdPodersJ2, sumaPaPodersJ1 + pa);
-        this.esColpejatAmb(sumaPdPodersJ1 + pd, sumaPaPodersJ2);
+        System.out.println(player);
+        System.out.println("----- Atac -----"); // Ataquen els dos Jugadors  TODO Si un jugador mor en el primer atac, continua atacant fins que acaba el torn
+        player.esColpejatAmb(sumaPdPodersJ2+ player.getPuntsDefensa(), sumaPaPodersJ1 + this.getPuntsAtac());
+        this.esColpejatAmb(sumaPdPodersJ1 + this.getPuntsDefensa(), sumaPaPodersJ2 + player.getPuntsAtac());
         System.out.println("----- DESPRES DE L'ATAC -----"); // Stats després de l'atac
         System.out.println("Atacant: " + this);
         System.out.println("Atacat: " + player);
