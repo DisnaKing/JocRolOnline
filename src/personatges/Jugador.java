@@ -68,12 +68,8 @@ public class Jugador {
                 System.out.println("Equip eliminat");
             }
         } else {
-            if (this.equip != null) { // Si ja té un equip, eliminar-lo primer
-                this.equip.lleva(this);
-            }
             this.equip = equip;
             equip.posa(this);
-            System.out.println(this.getNom() + " s'ha unit a l'equip " + equip.getNom());
         }
     }
 

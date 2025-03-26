@@ -1,5 +1,6 @@
 package inici;
 
+import Altres.Equip;
 import personatges.Alien;
 import personatges.Guerrer;
 import personatges.Huma;
@@ -61,7 +62,7 @@ public class Jugadors {
         System.out.println("Quin jugador vols llevar de l'equip?");
         consultar();
         int opcio=Teclat.scInt()-1;
-        llistaJugadors.get(opcio).getEquip().lleva(llistaJugadors.get(opcio));
+        llistaJugadors.get(opcio).setEquip(null);
     }
 
 
@@ -72,11 +73,17 @@ public class Jugadors {
         }else {
             System.out.println("Quin jugador vols assignar a un equip?");
             consultar();
-            int opcio=Teclat.scInt()-1;
+            int jugador=Teclat.scInt()-1;
+            Jugador j1 = llistaJugadors.get(jugador);
             System.out.println("A quin equip vols assignar el jugador?");
             Equips.consultar();
             int opcioEquip=Teclat.scInt()-1;
-            llistaJugadors.get(opcio).setEquip(Equips.llistaEquips.get(opcioEquip));
+            Equip equip = Equips.llistaEquips.get(opcioEquip);
+            if (j1.getEquip()==null) {
+                llistaJugadors.get(jugador).setEquip(equip);
+            }else {
+                System.out.println("El jugador ja te un equip");
+            }
         }
     }
 

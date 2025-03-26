@@ -1,10 +1,16 @@
 package inici;
+import Altres.Equip;
+import personatges.Alien;
 import teclat.Teclat;
 
 
 public class JocDeRol {
     public static void main(String[] args) {
         clearConsole();
+        Alien pepe = new Alien("Pepe", 10, 5, 100);
+        Equip pacos = new Equip("Pacos");
+        Jugadors.llistaJugadors.add(pepe);
+        Equips.llistaEquips.add(pacos);
         int opcio = -1;
         while (opcio != 0){
             System.out.println("JOC DE ROL\n1. Configuracio\n2. Jugar\n0. Sortir");
