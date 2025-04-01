@@ -5,7 +5,7 @@ import personatges.Jugador;
 import java.util.ArrayList;
 
 public class Equip {
-    private String nom;
+    private final String nom;
     ArrayList<Jugador> membres = new ArrayList<>();
     public Equip(String nom){
         this.nom=nom;

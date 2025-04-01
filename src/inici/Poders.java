@@ -8,7 +8,7 @@ public class Poders {
     static ArrayList<Altres.Poders>llistaPoders = new ArrayList<>();
 
     public static void menu(){
-        int opcio=-1;
+        int opcio;
         do {
             System.out.println("PODERS\n1. Crear\n2. Consultar\n3. Eliminar\n0. Eixir");
             try {

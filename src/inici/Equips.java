@@ -9,7 +9,7 @@ public class Equips {
     static ArrayList<Equip>llistaEquips = new ArrayList<>();
 
     public static void menu(){
-        int opcio=-1;
+        int opcio;
         do {
             System.out.println("EQUIPS\n1. Crear\n2. Consultar\n3. Eliminar\n0. Eixir");
             try {

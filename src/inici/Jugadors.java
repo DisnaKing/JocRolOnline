@@ -63,7 +63,6 @@ public class Jugadors {
         llistaJugadors.get(opcio).getPoders().add(Poders.llistaPoders.get(opcioPoder));
     }
 
-    // TODO - solucionar stackOverflowError
     public static void llevarDEquip(){
         System.out.println("Quin jugador vols llevar de l'equip?");
         consultar();
@@ -72,7 +71,6 @@ public class Jugadors {
     }
 
 
-    // TODO - solucionar stackOverflowError
     public static void assignarAEquip(){
         if (Equips.llistaEquips.isEmpty()){
             System.out.println("No hi ha equips creats");

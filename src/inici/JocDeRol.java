@@ -105,7 +105,19 @@ public class JocDeRol {
             Jugadors.llistaJugadors.remove(atacat);
         }
     }
-
+    static public boolean volGuardar(){
+        System.out.println("Vols guardar la partida? (S/N)");
+        Character opcio = Teclat.scChar();
+        if (opcio.equals('S')){
+            Partida.guardar();
+            return true;
+        } else if (opcio.equals('N')){
+            return false;
+        } else {
+            System.out.println("Opcio incorrecta");
+            return volGuardar();
+        }
+    }
     static public void menuJugar(){
         System.out.println("Inici del joc\n1 - Automatitzat\n2 - Manual");
         int opcio;
@@ -119,9 +131,11 @@ public class JocDeRol {
         switch (opcio){
             case 1:
                 automatitzat();
+                if (volGuardar()){Partida.guardar();}
                 break;
             case 2:
                 manual();
+                if (volGuardar()){Partida.guardar();}
                 break;
             default:
                 System.out.println("Opcio incorrecta");

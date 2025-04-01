@@ -10,5 +10,4 @@ public class Teclat {
         return resultat;
     }
     static public char scChar(){return sc.nextLine().charAt(0);}
-    static public void intro(){sc.nextLine();}
 }
