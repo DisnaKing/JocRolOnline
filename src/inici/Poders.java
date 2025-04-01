@@ -1,5 +1,7 @@
 package inici;
 
+import teclat.Teclat;
+
 import java.util.ArrayList;
 
 public class Poders {
@@ -9,7 +11,13 @@ public class Poders {
         int opcio=-1;
         do {
             System.out.println("PODERS\n1. Crear\n2. Consultar\n3. Eliminar\n0. Eixir");
-            opcio=teclat.Teclat.scInt();
+            try {
+                opcio = Teclat.scInt();
+            }
+            catch (Exception e){
+                System.out.println("Opcio incorrecta");
+                opcio=-1;
+            }
             JocDeRol.clearConsole();
             switch (opcio){
                 case 1:

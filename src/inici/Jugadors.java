@@ -16,7 +16,13 @@ public class Jugadors {
         int opcio;
         do {
             System.out.println("JUGADORS\n1. Crear\n2. Consultar\n3. Eliminar\n 4. Assignar a equip\n5. Llevar d'equip\n6. Assignar poder\n0. Eixir");
-            opcio=Teclat.scInt();
+            try {
+                opcio = Teclat.scInt();
+            }
+            catch (Exception e){
+                System.out.println("Opcio incorrecta");
+                opcio=-1;
+            }
             JocDeRol.clearConsole();
             switch (opcio){
                 case 1:

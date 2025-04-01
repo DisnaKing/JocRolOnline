@@ -12,7 +12,13 @@ public class Equips {
         int opcio=-1;
         do {
             System.out.println("EQUIPS\n1. Crear\n2. Consultar\n3. Eliminar\n0. Eixir");
-            opcio=Teclat.scInt();
+            try {
+                opcio = Teclat.scInt();
+            }
+            catch (Exception e){
+                System.out.println("Opcio incorrecta");
+                opcio=-1;
+            }
             JocDeRol.clearConsole();
             switch (opcio){
                 case 1:

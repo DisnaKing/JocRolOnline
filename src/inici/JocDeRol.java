@@ -1,9 +1,9 @@
 package inici;
-import Altres.Equip;
 import personatges.Alien;
 import personatges.Huma;
 import personatges.Jugador;
 import teclat.Teclat;
+import Altres.*;
 
 import java.util.Random;
 
@@ -20,14 +20,20 @@ public class JocDeRol {
         int opcio = -1;
         while (opcio != 0){
             System.out.println("JOC DE ROL\n1. Configuracio\n2. Jugar\n0. Sortir");
-            opcio=Teclat.scInt();
+            try {
+                opcio = Teclat.scInt();
+            }
+            catch (Exception e){
+                System.out.println("Opcio incorrecta");
+                opcio=-1;
+            }
             clearConsole();
             switch (opcio){
                 case 1:
                     menuConfiguracio();
                     break;
                 case 2:
-                    menuJugar();
+                    partida();
                     break;
                 case 0:
                     System.out.println("Sortint del joc de rol");
@@ -102,7 +108,14 @@ public class JocDeRol {
 
     static public void menuJugar(){
         System.out.println("Inici del joc\n1 - Automatitzat\n2 - Manual");
-        int opcio = Teclat.scInt();
+        int opcio;
+        try {
+            opcio = Teclat.scInt();
+        }
+        catch (Exception e){
+            System.out.println("Opcio incorrecta");
+            opcio=-1;
+        }
         switch (opcio){
             case 1:
                 automatitzat();
@@ -112,14 +125,44 @@ public class JocDeRol {
                 break;
             default:
                 System.out.println("Opcio incorrecta");
+                break;
         }
     }
-
+    static  public  void partida(){
+        System.out.println("1- Nova Partida\n2- Carregar Partida");
+        int partida;
+        try {
+            partida = Teclat.scInt();
+        }
+        catch (Exception e){
+            System.out.println("Opcio incorrecta");
+            partida=-1;
+        }
+        switch (partida){
+            case 1:
+                menuJugar();
+                break;
+            case 2:
+                System.out.println("Carregar partida");
+                Partida.carregar();
+                menuJugar();
+                break;
+            default:
+                System.out.println("Opcio incorrecta");
+                break;
+        }
+    }
     static public void menuConfiguracio(){
         int opcio = -1;
         while (opcio != 0) {
             System.out.println("CONFIGURACIO\n1. Jugadors\n2. Equips\n3. Poders\n0. Sortir");
-            opcio = Teclat.scInt();
+            try {
+                opcio = Teclat.scInt();
+            }
+            catch (Exception e){
+                System.out.println("Opcio incorrecta");
+                opcio=-1;
+            }
             switch (opcio){
                 case 1:
                     Jugadors.menu();
