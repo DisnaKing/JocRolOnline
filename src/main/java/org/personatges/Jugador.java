@@ -1,6 +1,6 @@
-package personatges;
+package org.personatges;
 
-import Altres.*;
+import org.Altres.*;
 
 import java.util.ArrayList;
 import java.util.Objects;

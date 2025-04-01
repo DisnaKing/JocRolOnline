@@ -1,16 +1,18 @@
-package inici;
+package org.inici;
 
-import Altres.Equip;
-import personatges.Alien;
-import personatges.Guerrer;
-import personatges.Huma;
-import personatges.Jugador;
-import teclat.Teclat;
+
+import org.Altres.Equip;
+import org.inici.Equips;
+import org.personatges.Alien;
+import org.personatges.Guerrer;
+import org.personatges.Huma;
+import org.personatges.Jugador;
+import org.teclat.Teclat;
 
 import java.util.ArrayList;
 
 public class Jugadors {
-    static ArrayList<Jugador> llistaJugadors = new ArrayList<>();
+    static public ArrayList<Jugador> llistaJugadors = new ArrayList<>();
 
     public static void menu(){
         int opcio;

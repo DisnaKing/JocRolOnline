@@ -1,7 +1,7 @@
-package personatges;
+package org.personatges;
 // TODO Arreglar bufo
-import Altres.Equip;
-import Altres.Poders;
+import org.Altres.Equip;
+import org.Altres.Poders;
 
 public class Alien extends Jugador{ // Tenen bonificacions en atac i penalitzacions en defensa
     public Alien(String nom, int puntsAtac, int puntsDefensa, int vides){

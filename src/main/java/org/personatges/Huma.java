@@ -1,4 +1,4 @@
-package personatges;
+package org.personatges;
 
 public class Huma extends Jugador {    // No tenen bonificacions en defensa i atac
     public Huma(String nom, int puntsAtac, int puntsDefensa, int vides) {

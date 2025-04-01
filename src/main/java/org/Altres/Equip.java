@@ -1,6 +1,7 @@
-package Altres;
+package org.Altres;
 
-import personatges.Jugador;
+
+import org.personatges.Jugador;
 
 import java.util.ArrayList;
 

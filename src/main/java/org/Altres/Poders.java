@@ -1,4 +1,5 @@
-package Altres;
+package org.Altres;
+
 
 public class Poders {
     String nom;

@@ -1,4 +1,4 @@
-package teclat;
+package org.teclat;
 import java.util.Scanner;
 
 public class Teclat {

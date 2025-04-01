@@ -1,9 +1,10 @@
-package inici;
-import personatges.Alien;
-import personatges.Huma;
-import personatges.Jugador;
-import teclat.Teclat;
-import Altres.*;
+package org.inici;
+
+import org.personatges.Alien;
+import org.personatges.Huma;
+import org.personatges.Jugador;
+import org.teclat.Teclat;
+import org.Altres.*;
 
 import java.util.Random;
 

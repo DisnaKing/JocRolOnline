@@ -1,11 +1,12 @@
-package inici;
+package org.inici;
 
-import teclat.Teclat;
+
+import org.teclat.*;
 
 import java.util.ArrayList;
 
 public class Poders {
-    static ArrayList<Altres.Poders>llistaPoders = new ArrayList<>();
+    static ArrayList<org.Altres.Poders>llistaPoders = new ArrayList<>();
 
     public static void menu(){
         int opcio;
@@ -41,13 +42,13 @@ public class Poders {
     public static void eliminar(){
         System.out.println("Quin poder vols eliminar?");
         consultar();
-        int opcio=teclat.Teclat.scInt()-1;
+        int opcio = org.teclat.Teclat.scInt()-1;
         llistaPoders.remove(opcio);
     }
 
     public static void consultar(){
         int i=1;
-        for (Altres.Poders poder : llistaPoders){
+        for (org.Altres.Poders poder : llistaPoders){
             System.out.println(i+" - "+poder);
             i++;
         }
@@ -55,12 +56,12 @@ public class Poders {
 
     public static void crear(){
         System.out.println("Nom del poder?");
-        String nom=teclat.Teclat.scString();
+        String nom=Teclat.scString();
         System.out.println("Punts d'atac del poder?");
-        int pa=teclat.Teclat.scInt();
+        int pa=Teclat.scInt();
         System.out.println("Punts de defensa del poder?");
-        int pd=teclat.Teclat.scInt();
-        Altres.Poders poder = new Altres.Poders(nom,pa,pd);
+        int pd=Teclat.scInt();
+        org.Altres.Poders poder = new org.Altres.Poders(nom,pa,pd);
         llistaPoders.add(poder);
     }
 }

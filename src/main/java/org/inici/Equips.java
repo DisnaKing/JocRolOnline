@@ -1,8 +1,8 @@
-package inici;
+package org.inici;
 
-import Altres.Equip;
-import personatges.Jugador;
-import teclat.Teclat;
+import org.Altres.Equip;
+import org.personatges.Jugador;
+import org.teclat.Teclat;
 import java.util.ArrayList;
 
 public class Equips {

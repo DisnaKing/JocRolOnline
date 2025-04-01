@@ -1,6 +1,6 @@
-package personatges;
+package org.personatges;
 
-import Altres.Equip;
+import org.Altres.Equip;
 
 public class Guerrer extends Huma { // Poden aguantar més ferides que la resta de jugadors
     public Guerrer(String nom, int puntsAtac, int puntsDefensa, int vides){

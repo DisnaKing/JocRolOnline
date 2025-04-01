@@ -1,0 +1,9 @@
+[
+  {
+    "nom": "Pepe",
+    "puntsAtac": 100,
+    "puntsDefensa": 5,
+    "vides": 100,
+    "poders": []
+  }
+]
