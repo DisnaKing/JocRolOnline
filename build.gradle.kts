@@ -1,9 +1,14 @@
 plugins {
     id("java")
+    id("application") // necesario para usar el bloque `application`
 }
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass.set("org.inici.JocDeRol")
+}
 
 repositories {
     mavenCentral()

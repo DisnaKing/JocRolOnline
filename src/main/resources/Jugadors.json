@@ -1,0 +1,24 @@
+[
+  {
+    "nom": "Pepe",
+    "puntsAtac": 30,
+    "puntsDefensa": 5,
+    "vides": 100,
+    "equip": "pacos",
+    "poders": []
+  },
+  {
+    "nom": "Guillem",
+    "puntsAtac": 20,
+    "puntsDefensa": 10,
+    "vides": 100,
+    "poders": []
+  },
+  {
+    "nom": "Andreu",
+    "puntsAtac": 10,
+    "puntsDefensa": 10,
+    "vides": 100,
+    "poders": []
+  }
+]

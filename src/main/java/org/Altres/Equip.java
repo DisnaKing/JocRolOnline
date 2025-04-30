@@ -1,9 +1,11 @@
 package org.Altres;
 
 
+import org.inici.Equips;
 import org.personatges.Jugador;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Equip {
     private final String nom;
@@ -42,5 +44,15 @@ public class Equip {
             membres.append("\t- ").append(this.getMembres().get(i).toString());
         }
         return "Equip "+this.nom+" :\n"+ membres;
+    }
+    @Override
+    public boolean equals(String o) {
+        for (Equip e : Equips.llistaEquips){
+            if(e.getNom().equals(o)){
+                return true;
+                break;
+            }
+        }
+        return false;
     }
 }

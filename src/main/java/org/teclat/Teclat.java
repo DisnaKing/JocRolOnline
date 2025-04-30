@@ -9,5 +9,6 @@ public class Teclat {
         resultat=sc.nextInt();sc.nextLine();
         return resultat;
     }
-    static public char scChar(){return sc.nextLine().charAt(0);}
+    static public char scChar(){return sc.nextLine().toUpperCase().charAt(0);}
+    static public void nl(){sc.nextLine();}
 }
