@@ -24,16 +24,12 @@ public class JocDeRol {
      * @param args Arguments de línia de comandaments (no utilitzats)
      */
     public static void main(String[] args) {
-        // Creació de jugadors d'exemple per a proves
-        Alien pepe = new Alien("Pepe", 30, 5, 100);
-        Huma guillem = new Huma("Guillem", 20, 10, 100);
-        Guerrer Andreu = new Guerrer("Andreu", 10, 10, 100);
+        menuPartida();
+        // TODO Arreglar Cargar partida
+        //partida();
+    }
 
-        // Afegim els jugadors a la llista global
-        Jugadors.llistaJugadors.add(pepe);
-        Jugadors.llistaJugadors.add(guillem);
-        Jugadors.llistaJugadors.add(Andreu);
-
+    public static void menuPartida(){
         String opcio = "-1";
         while (!opcio.equals("0")) {
             // Menú principal del joc
@@ -48,7 +44,7 @@ public class JocDeRol {
                     menuJugar(); // Accés al mode de joc
                     break;
                 case "0":
-                    System.out.println("Sortint del joc de rol");
+                    System.out.println("Sortint de la partida");
                     break;
                 default:
                     System.out.println("Opcio incorrecta");
@@ -121,11 +117,11 @@ public class JocDeRol {
         ArrayList<Jugador> jugadorsPartida = clonarLista(Jugadors.llistaJugadors);
 
 
-        while (jugadorsPartida.size()-1 > jugadorsMorts.size()) {
+        while (jugadorsPartida.size() >= jugadorsMorts.size()) {
             // Cada jugador viu realitza un atac per torn
             for (int i = 0; i < jugadorsPartida.size(); i++) {
                 Jugador atacant = jugadorsPartida.get(i);
-                Jugador atacat;
+                Jugador atacat = atacant;
                 int atacatSeleccionat;
 
                 if (jugadorsMorts.contains(atacant)) {
@@ -134,13 +130,20 @@ public class JocDeRol {
 
                 // Selecció d'objectiu per part de l'usuari
                 do {
-                    Jugadors.consultar(); // Mostrem la llista de jugadors
-                    atacatSeleccionat = Teclat.scInt()-1;
-                    atacat = jugadorsPartida.get(atacatSeleccionat);
+                    System.out.println("\u001B[32m---------------\u001B[0m Atacant : "+ atacant.getNom()+"\u001B[32m---------------\u001B[0m\n");
+                    try {
+                        Jugadors.consultar(jugadorsPartida); // Mostrem la llista de jugadors
+                        atacatSeleccionat = Teclat.scInt()-1;
+                        atacat = jugadorsPartida.get(atacatSeleccionat);
 
-                    if (atacat.equals(atacant)) {
-                        System.out.println("No pots atacar a tu mateix");
+                        if (atacat.equals(atacant)) {
+                            System.out.println(" \u001B[31m X \u001B[0mNo et pots atacar a tu mateix\n");
+                        }
+                    } catch (Exception e) {
+                        Teclat.nl();
+                        System.out.println("Error al seleccionar objectiu");
                     }
+
                 } while (jugadorsMorts.contains(atacat) || atacant.equals(atacat));
 
                 // Realitzem l'atac
@@ -247,27 +250,27 @@ public class JocDeRol {
      * Mostra el menú per seleccionar entre nova partida o carregar una existent.
      */
     static public void partida() {
-        System.out.println("1- Nova Partida\n2- Carregar Partida");
-        int partida;
-        try {
-            partida = Teclat.scInt();
-        } catch (Exception e) {
-            System.out.println("Opcio incorrecta");
-            partida = -1;
-        }
-        switch (partida) {
-            case 1:
-                menuJugar();
-                break;
-            case 2:
-               System.out.println("Carregant partida");
-               System.out.println("En desenvolupament");
-                /* Partida.carregar();
-                menuJugar();*/
-                break;
-            default:
-                System.out.println("Opcio incorrecta");
-                break;
+        String opcio = "-1";
+        while (!opcio.equals("0")) {
+            System.out.println("1- Nova Partida\n2- Carregar Partida");
+            opcio = Teclat.scString();
+            switch (opcio) {
+                case "1":
+                    menuPartida();
+                    break;
+                case "2":
+                    System.out.println("Carregant partida");
+                    System.out.println("En desenvolupament");
+                    Partida.carregar();
+                    menuPartida();
+                    break;
+                case "0":
+                    System.out.println("Sortint del joc de rol");
+                    break;
+                default:
+                    System.out.println("Opcio incorrecta");
+                    break;
+            }
         }
     }
 

@@ -2,17 +2,21 @@ package org.personatges;
 
 import org.Altres.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Jugador implements Cloneable{
+public class Jugador implements Cloneable, Serializable {
     private final String nom;
     private int puntsAtac;
     private int puntsDefensa;
     private int vides;
+    private String tipus;
     private Equip equip;
+
     static public int videsInicials = 200;
     private final ArrayList<Poders> poders;
+
 
     // Constructor sin parámetro equip: usa null por defecto
     public Jugador(String nom, int puntsAtac, int puntsDefensa, int vides) {
@@ -22,7 +26,7 @@ public class Jugador implements Cloneable{
     }
 
     // Constructor con equip como parámetro
-    public Jugador(String nom, int puntsAtac, int puntsDefensa, int vides, Equip equip) {
+    public Jugador(String nom, int puntsAtac, int puntsDefensa, int vides,Equip equip) {
         System.out.println("Sóc el constructor de personatges Jugador pero estic creant un "+this.getClass().getSimpleName());
         this.nom = nom;
         this.puntsAtac = puntsAtac;
@@ -30,6 +34,7 @@ public class Jugador implements Cloneable{
         this.vides = vides;
         this.equip = equip;
         this.poders = new ArrayList<>();
+        this.tipus = this.getClass().getSimpleName();
     }
 
     // Getters & Setters
@@ -120,7 +125,7 @@ public class Jugador implements Cloneable{
 
         // Atac
 
-        System.out.println(this.nom+" es colpejat amb "+puntsAtac+"i es defen amb "+this.getPuntsDefensa()+". Vides:"+this.getVides() +"- "+(puntsAtac-this.getPuntsDefensa())+" = "+(this.getVides()-(puntsAtac-defensa)));
+        System.out.println(this.nom+" es colpejat amb "+ puntsAtac +" i es defen amb "+this.getPuntsDefensa()+". Vides: "+this.getVides() +"- "+(puntsAtac-this.getPuntsDefensa())+" = "+(this.getVides()-(puntsAtac-defensa)));
 
         //Establim vides finals
         int videsFinals;
@@ -162,22 +167,22 @@ public class Jugador implements Cloneable{
         int atacJ2 = player.sumaPoders();
 
         // Atac
-        System.out.println("----- ABANS DE L'ATAC ------"); // Stats abans de l'atac
+        System.out.println("\n\u001B[32m------\u001B[0m ABANS DE L'ATAC \u001B[32m------\u001B[0m\n"); // Stats abans de l'atac
         System.out.println(this);
         System.out.println(player);
 
 
-        System.out.println("----- Atac -----"); // Ataquen els dos Jugadors
+        System.out.println("\u001B[31m ----- \u001B[0m Atac \u001B[31m ----- \u001B[0m\n"); // Ataquen els dos Jugadors
         player.esColpejatAmb(atacJ1);
 
         // Comprovar que el jugador atacat no ha mort
 
         if (player.getVides() >= 0) {this.esColpejatAmb(atacJ2);}
-        else { System.out.println(player.getNom() + " ha mort i no pot contraatacar.");}
+        else { System.out.println("\u001B[31m"+ player.getNom() + " ha mort i no pot contraatacar.\u001B[0m\n");}
 
         // Stats després de l'atac
 
-        System.out.println("----- DESPRES DE L'ATAC -----");
+        System.out.println("\n\u001B[32m------\u001B[0m DESPRES DE L'ATAC \u001B[32m------\u001B[0m\n");
         System.out.println("Atacant: " + this);
         System.out.println("Atacat: " + player);
     }

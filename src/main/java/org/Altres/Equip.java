@@ -45,14 +45,8 @@ public class Equip {
         }
         return "Equip "+this.nom+" :\n"+ membres;
     }
-    @Override
-    public boolean equals(String o) {
-        for (Equip e : Equips.llistaEquips){
-            if(e.getNom().equals(o)){
-                return true;
-                break;
-            }
-        }
-        return false;
+
+    public boolean equals(String newTeam){
+        return this.getNom().equals(newTeam);
     }
 }

@@ -40,7 +40,7 @@ public class Jugadors {
                     crear(); // Crea un nou jugador
                     break;
                 case "2":
-                    consultar(); // Mostra tots els jugadors
+                    consultar(Jugadors.llistaJugadors); // Mostra tots els jugadors
                     break;
                 case "3":
                     eliminar(); // Elimina un jugador
@@ -75,7 +75,7 @@ public class Jugadors {
         try{
             // Demanem quin jugador volem modificar
             System.out.println("Quin jugador vols assignar un poder?");
-            consultar(); // Mostrem la llista de jugadors
+            consultar(Jugadors.llistaJugadors); // Mostrem la llista de jugadors
 
             // Llegim la selecció (restem 1 perquè l'usuari veu números començant per 1)
             int opcio = Teclat.scInt()-1;
@@ -102,7 +102,7 @@ public class Jugadors {
         try{
             // Demanem quin jugador volem treure de l'equip
             System.out.println("Quin jugador vols llevar de l'equip?");
-            consultar(); // Mostrem la llista
+            consultar(Jugadors.llistaJugadors); // Mostrem la llista
 
             // Llegim la selecció
             int opcio = Teclat.scInt()-1;
@@ -127,7 +127,7 @@ public class Jugadors {
             } else {
                 // Demanem quin jugador volem assignar
                 System.out.println("Quin jugador vols assignar a un equip?");
-                consultar(); // Mostrem jugadors
+                consultar(Jugadors.llistaJugadors); // Mostrem jugadors
 
                 // Llegim la selecció
                 int jugador = Teclat.scInt()-1;
@@ -161,7 +161,7 @@ public class Jugadors {
         try{
             // Demanem quin jugador volem eliminar
             System.out.println("Quin jugador vols eliminar?");
-            consultar(); // Mostrem la llista
+            consultar(Jugadors.llistaJugadors); // Mostrem la llista
 
             // Llegim la selecció
             int jugador = Teclat.scInt()-1;
@@ -177,7 +177,7 @@ public class Jugadors {
     /**
      * Mostra per pantalla la llista de jugadors amb el seu número d'ordre.
      */
-    public static void consultar(){
+    public static void consultar(ArrayList<Jugador>llistaJugadors){
         int i = 1;
         // Recorrem tots els jugadors i els mostrem numerats
         for (Jugador jugador : llistaJugadors){
@@ -276,7 +276,7 @@ public class Jugadors {
                     crear(); // Reintentar crear
                     break;
                 case 2:
-                    consultar(); // Reintentar consultar
+                    consultar(Jugadors.llistaJugadors); // Reintentar consultar
                     break;
                 case 3:
                     eliminar(); // Reintentar eliminar

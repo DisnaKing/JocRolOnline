@@ -78,5 +78,12 @@ public class Equips {
             }
         }
     }
+    public static boolean contains(String equipNou){
+        boolean existe = false;
+        for (Equip e : Equips.llistaEquips) {
+            if (e.equals(equipNou)) existe=true;
+        }
+        return existe;
+    }
 
 }

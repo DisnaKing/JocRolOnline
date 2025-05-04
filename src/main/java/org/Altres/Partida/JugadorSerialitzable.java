@@ -12,6 +12,8 @@ class JugadorSerializable {
     int vides;
     String equip; // Solo guardamos el nombre del equipo
     ArrayList<Poders> poders;
+    String tipus;
+
 
     JugadorSerializable(Jugador j) {
         this.nom = j.getNom();
@@ -20,6 +22,8 @@ class JugadorSerializable {
         this.vides = j.getVides();
         this.equip = (j.getEquip() != null) ? j.getEquip().getNom() : null;
         this.poders = j.getPoders();
+        this.tipus = j.getClass().getSimpleName();  // Exemple: "Alien", "Guerrer", etc.
+
     }
 }
 

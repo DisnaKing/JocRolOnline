@@ -10,9 +10,13 @@ import org.inici.Jugadors;
 // paquets externs
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 
 public class Partida {
@@ -42,71 +46,73 @@ public class Partida {
         }
     }
     // Carregar partida
-    static public void carregar(){
+    static public void carregar() {
         System.out.println("Carregant partida...");
 
+        Gson gson = null;
         try {
 
             // Leer el archivo JSON
             java.io.Reader reader = new java.io.FileReader("src/main/resources/Jugadors.json");
-            Gson gson = new Gson();
-            JugadorSerializable[] jugadorsArray = gson.fromJson(reader, JugadorSerializable[].class);
+            gson = new Gson();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Jugadors.json"));
+            String jsonContent = br.lines().collect(Collectors.joining());
+            System.out.println("Contingut JSON: " + jsonContent);
+            JugadorSerializable[] jugadorsArray = gson.fromJson(jsonContent, JugadorSerializable[].class);
 
             // Limpiamos las listas actuales
             Jugadors.llistaJugadors.clear();
 
             for (JugadorSerializable js : jugadorsArray) {
                 // Creamos el jugador real (de momento sin equipo)
-                Jugador j = new Jugador(js.nom, js.puntsAtac, js.puntsDefensa, js.vides, null);
+                Jugador j;
+                switch (js.tipus) {
+                    case "Alien":
+                        j = new org.personatges.Alien(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                        break;
+                    case "Guerrer":
+                        j = new org.personatges.Guerrer(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                        break;
+                    case "Huma":
+                        j = new org.personatges.Huma(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                        break;
+                    default:
+                        System.out.println("Tipus desconegut: " + js.tipus + ". Creant com a Jugador.");
+                        j = new Jugador(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                }
                 // Copiamos los poders
                 for (Poders p : js.poders) {
                     j.posa(p);
                 }
-                // TODO Crear equips abans d'asignar-los
+
                 // Si tiene un equipo, lo buscamos y lo asignamos
                 if (js.equip != null) {
-                    if (!Equips.llistaEquips.contains(js.equip)){
 
-                    Equip equipo = new Equip(js.equip);
-                    for (Equip e : org.inici.Equips.llistaEquips) {
-                        if (e.getNom().equals(js.equip)) {
-                            j.setEquip(e);
-                            break;
+                    // Crear equips abans d'asignar-los
+                    if (Equips.llistaEquips.isEmpty()){
+                        Equip equip = new Equip(js.equip);
+                        Equips.llistaEquips.add(equip);
+                        j.setEquip(equip);
+                    }else {
+                        if (!Equips.contains(js.equip)){
+                            Equip equip = new Equip(js.equip);
+                            j.setEquip(equip);
                         }
                     }
-                }
-                // Añadimos el jugador a la lista global
-                org.inici.Jugadors.llistaJugadors.add(j);
-                System.out.println("Partida carregada correctament.");
 
+                    // Añadimos el jugador a la lista global
+                    org.inici.Jugadors.llistaJugadors.add(j);
+                    System.out.println("Partida carregada correctament.");
+
+                }
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Hi han problemes al carregar la partida");
         }
 
-
-
-
-
-
-
-
-            // Convertir la cadena JSON a un array de Jugador
-            ArrayList lista = gson.fromJson("Jugadors", ArrayList.class);
-            for (Object obj : lista) {
-                if (obj instanceof Jugador) {
-                    Jugadors.llistaJugadors.add((Jugador) obj);
-                }
-            }
-
-            for(org.personatges.Jugador jugador : Jugadors.llistaJugadors){
-                System.out.println(jugador);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        for (org.personatges.Jugador jugador : Jugadors.llistaJugadors) {
+            System.out.println(jugador);
         }
     }
+    }
 
-
-
-}
