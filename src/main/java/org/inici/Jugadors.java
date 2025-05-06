@@ -7,8 +7,6 @@
  */
 package org.inici;
 
-import org.Altres.Equip;
-import org.inici.Equips;
 import org.personatges.Alien;
 import org.personatges.Guerrer;
 import org.personatges.Huma;
@@ -16,6 +14,8 @@ import org.personatges.Jugador;
 import org.teclat.Teclat;
 
 import java.util.ArrayList;
+
+import static org.inici.JocDeRol.pos;
 
 public class Jugadors {
     // Llista estàtica que emmagatzema tots els jugadors del sistema
@@ -73,22 +73,33 @@ public class Jugadors {
      */
     public static void assignarPoder(){
         try{
-            // Demanem quin jugador volem modificar
-            System.out.println("Quin jugador vols assignar un poder?");
-            consultar(Jugadors.llistaJugadors); // Mostrem la llista de jugadors
+            // Demanem quin jugador volem eliminar
+            System.out.println("A quin jugador vols asignar el poder? ");
+            consultar(Jugadors.llistaJugadors); // Mostrem la llista
+            System.out.println("Introdueix el nom:");
 
-            // Llegim la selecció (restem 1 perquè l'usuari veu números començant per 1)
-            int opcio = Teclat.scInt()-1;
+            // Llegim la selecció
+            String nomJugador = Teclat.scString();
 
             // Demanem quin poder volem assignar
             System.out.println("Quin poder vols assignar al jugador?");
             Poders.consultar(); // Mostrem la llista de poders
+            System.out.println("Escriu el nom: ");
 
-            // Llegim la selecció del poder
-            int opcioPoder = Teclat.scInt()-1;
+            // llegim el poder
+            String nomPoder = Teclat.scString();
 
-            // Afegim el poder seleccionat al jugador seleccionat
-            llistaJugadors.get(opcio).getPoders().add(Poders.llistaPoders.get(opcioPoder));
+
+            // Busquem el jugador a la llista y li posem el poder
+            try{
+                    llistaJugadors.get(pos(nomJugador,'J')).posa(Poders.llistaPoders.get(pos(nomPoder,'P')));
+
+            } catch (Exception e) {
+                Teclat.nl();
+                System.out.println("Jugador o Poder no trobat");
+                incorrecto(3);
+            }
+
         } catch (Exception e) {
             incorrecto(6); // Gestionem errors
         }
@@ -103,12 +114,21 @@ public class Jugadors {
             // Demanem quin jugador volem treure de l'equip
             System.out.println("Quin jugador vols llevar de l'equip?");
             consultar(Jugadors.llistaJugadors); // Mostrem la llista
+            System.out.println("Introdueix el nom:");
 
             // Llegim la selecció
-            int opcio = Teclat.scInt()-1;
+            String nomJugador = Teclat.scString();
 
-            // Eliminem l'equip del jugador (posant-lo a null)
-            llistaJugadors.get(opcio).setEquip(null);
+            try{
+
+                llistaJugadors.get(pos(nomJugador,'J')).setEquip(null);
+                System.out.println("Equip eliminat\n");
+
+            } catch (Exception e) {
+                Teclat.nl();
+
+                System.out.println("Jugador o Equip no trobat");
+            }
         } catch (Exception e) {
             incorrecto(5); // Gestionem errors
         }
@@ -123,29 +143,43 @@ public class Jugadors {
         try {
             // Comprovem si hi ha equips creats
             if (Equips.llistaEquips.isEmpty()){
+
                 System.out.println("No hi ha equips creats");
+
             } else {
                 // Demanem quin jugador volem assignar
                 System.out.println("Quin jugador vols assignar a un equip?");
                 consultar(Jugadors.llistaJugadors); // Mostrem jugadors
+                System.out.println("Introdueix el nom:");
 
                 // Llegim la selecció
-                int jugador = Teclat.scInt()-1;
-                Jugador j1 = llistaJugadors.get(jugador);
+                String  jugador = Teclat.scString();
 
                 // Demanem a quin equip l'assignarem
                 System.out.println("A quin equip vols assignar el jugador?");
                 Equips.consultar(); // Mostrem equips
+                System.out.println("Introdueix el nom:");
 
                 // Llegim la selecció
-                int opcioEquip = Teclat.scInt()-1;
-                Equip equip = Equips.llistaEquips.get(opcioEquip);
+                String equip = Teclat.scString();
 
-                // Comprovem que el jugador no tinga ja equip
-                if (j1.getEquip() == null) {
-                    llistaJugadors.get(jugador).setEquip(equip);
-                } else {
-                    System.out.println("El jugador ja te un equip");
+                try {
+
+                    // Comprovem que el jugador no tinga ja un equip assignat
+                    if (llistaJugadors.get(pos(jugador,'J')).getEquip() == null){
+
+                        // Assignem l'equip al jugador
+                        llistaJugadors.get(pos(jugador,'J')).setEquip(Equips.llistaEquips.get(pos(equip,'E')));
+
+                    }else {
+
+                        // Si el jugador ja te un equip assignat, no el podem assignar a un altre
+                        System.out.println("El jugador ja te un equip assignat");
+                    }
+                } catch (Exception e) {
+                    Teclat.nl();
+                    System.out.println("Jugador o Equip no trobat");
+                    incorrecto(3);
                 }
             }
         } catch (Exception e) {
@@ -153,24 +187,29 @@ public class Jugadors {
         }
     }
 
+
+
     /**
      * Elimina un jugador de la llista de jugadors.
      * @throws Exception Si es produeix un error en la selecció del jugador
      */
     public static void eliminar(){
-        try{
-            // Demanem quin jugador volem eliminar
-            System.out.println("Quin jugador vols eliminar?");
-            consultar(Jugadors.llistaJugadors); // Mostrem la llista
 
-            // Llegim la selecció
-            int jugador = Teclat.scInt()-1;
+        // Demanem quin jugador volem eliminar
+        System.out.println("Quin jugador vols eliminar? ");
+        consultar(Jugadors.llistaJugadors); // Mostrem la llista
+        System.out.println("Introdueix el nom:");
 
-            // Eliminem el jugador de la llista
-            llistaJugadors.remove(llistaJugadors.get(jugador));
-            System.out.println("Jugador eliminat\n");
+        // Llegim la selecció
+        String nomJugador = Teclat.scString();
+
+        // Busquem el jugador a la llista i l'eliminem
+        try {
+            llistaJugadors.remove(pos(nomJugador,'J')); // Busquem el jugador a la llista i l'eliminem
         } catch (Exception e) {
-            incorrecto(3); // Gestionem errors
+            Teclat.nl();
+            System.out.println("Jugador no trobat");
+            incorrecto(3);
         }
     }
 

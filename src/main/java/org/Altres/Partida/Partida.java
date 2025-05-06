@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import static org.inici.JocDeRol.pos;
+
 
 public class Partida {
     // Guardar partida
@@ -80,17 +82,14 @@ public class Partida {
 
                 // Si tiene un equipo, lo buscamos y lo asignamos
                 if (js.equip != null) {
+                    Equip equipAuxiliar = new Equip(js.equip);
 
                     // Crear equips abans d'asignar-los
-                    if (Equips.llistaEquips.isEmpty()){
-                        Equip equip = new Equip(js.equip);
-                        Equips.llistaEquips.add(equip);
-                        j.setEquip(equip);
+                    if (Equips.llistaEquips.isEmpty()||!Equips.llistaEquips.contains(equipAuxiliar)) {
+                        Equips.llistaEquips.add(equipAuxiliar);
+                        j.setEquip(equipAuxiliar);
                     }else {
-                        if (!Equips.contains(js.equip)){
-                            Equip equip = new Equip(js.equip);
-                            j.setEquip(equip);
-                        }
+                        j.setEquip(Equips.llistaEquips.get(pos(js.equip, 'E')));
                     }
                 }
                 // Añadimos el jugador a la lista global

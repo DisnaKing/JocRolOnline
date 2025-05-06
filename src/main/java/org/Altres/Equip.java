@@ -46,7 +46,11 @@ public class Equip {
         return "Equip "+this.nom+" :\n"+ membres;
     }
 
-    public boolean equals(String newTeam){
-        return this.getNom().equals(newTeam);
+    public boolean equals(Object o) {
+
+        // Si l'objecto no es null y la clase es la mateixa comprovem els noms
+        if (o == null || getClass() != o.getClass()) return false;
+        org.Altres.Equip equip = (Equip) o;
+        return this.getNom().equals(equip.getNom());
     }
 }

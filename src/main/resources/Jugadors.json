@@ -13,15 +13,18 @@
     "puntsAtac": 20,
     "puntsDefensa": 5,
     "vides": 100,
-    "poders": [],
+    "poders": [
+      {
+        "nom": "FireBall",
+        "bonusAtac": 10,
+        "bonusDefensa": 0
+      },
+      {
+        "nom": "MetallicDefense",
+        "bonusAtac": 0,
+        "bonusDefensa": 10
+      }
+    ],
     "tipus": "Huma"
-  },
-  {
-    "nom": "mac",
-    "puntsAtac": 20,
-    "puntsDefensa": 5,
-    "vides": 100,
-    "poders": [],
-    "tipus": "Guerrer"
   }
 ]

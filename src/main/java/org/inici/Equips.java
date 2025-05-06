@@ -4,6 +4,8 @@ import org.Altres.Equip;
 import org.teclat.Teclat;
 import java.util.ArrayList;
 
+import static org.inici.JocDeRol.pos;
+
 public class Equips {
     static public ArrayList<Equip>llistaEquips = new ArrayList<>();
 
@@ -35,11 +37,13 @@ public class Equips {
     public static void  eliminar(){
         System.out.println("Quin equip vols eliminar?");
         consultar();
+        System.out.println("Introdueix el nom:");
+        String nom = Teclat.scString();
         try {
-            int opcio = Teclat.scInt() - 1;
-            if (llistaEquips.size() >= opcio){llistaEquips.remove(opcio);}
-            else System.out.println("L'equip seleccionat no existeix");
+            llistaEquips.remove(pos(nom,'P'));
         } catch (Exception e) {
+            Teclat.nl();
+            System.out.println("Equip no trobat");
             incorrecto(3);
         }
     }
@@ -78,12 +82,4 @@ public class Equips {
             }
         }
     }
-    public static boolean contains(String equipNou){
-        boolean existe = false;
-        for (Equip e : Equips.llistaEquips) {
-            if (e.equals(equipNou)) existe=true;
-        }
-        return existe;
-    }
-
 }

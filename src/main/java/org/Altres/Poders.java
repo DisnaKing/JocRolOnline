@@ -27,5 +27,12 @@ public class Poders {
     public String toString(){
         return this.nom+" (BA:"+this.bonusAtac+", BD:"+this.bonusDefensa+")";
     }
+    public boolean equals(Object o) {
+
+        // Si l'objecto no es null y la clase es la mateixa comprovem els noms
+        if (o == null || getClass() != o.getClass()) return false;
+        org.Altres.Poders poder = (Poders) o;
+        return this.getNom().equals(poder.getNom());
+    }
 }
 

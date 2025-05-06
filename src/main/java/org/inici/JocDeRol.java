@@ -1,5 +1,6 @@
 package org.inici;
 
+import org.Altres.Equip;
 import org.Altres.Partida.Partida;
 
 import org.personatges.Alien;
@@ -312,5 +313,53 @@ public class JocDeRol {
                     break;
             }
         }
+    }
+    public static int pos(String nom, char tipus) {
+        int pos = -1;
+        switch (tipus) {
+            case 'J':
+                Jugador jugadorABuscar = new Jugador(nom, 0, 0, 0);
+                try {
+                    if (Jugadors.llistaJugadors.contains(jugadorABuscar)) {
+
+                        // Busquem el jugador a la llista
+                        pos = Jugadors.llistaJugadors.indexOf(jugadorABuscar);
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error al buscar el jugador: " + e.getMessage());
+                }
+                return pos;
+            case 'P':
+                org.Altres.Poders poderABuscar = new org.Altres.Poders(nom, 0, 0);
+                try {
+                    if (org.inici.Poders.llistaPoders.contains(poderABuscar)){
+
+                        // Busquem el jugador a la llista
+                        pos = org.inici.Poders.llistaPoders.indexOf(poderABuscar);
+                        break;
+
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error al buscar el jugador: " + e.getMessage());
+                }
+                return pos;
+            case 'E':
+                Equip equipABuscar = new Equip(nom);
+                try {
+                    if (Equips.llistaEquips.contains(equipABuscar)){
+
+                        // Busquem el jugador a la llista
+                        pos = Equips.llistaEquips.indexOf(equipABuscar);
+                        break;
+
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error al buscar el jugador: " + e.getMessage());
+                }
+                return pos;
+
+        }
+        return pos;
     }
 }

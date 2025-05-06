@@ -5,20 +5,16 @@ import org.teclat.*;
 
 import java.util.ArrayList;
 
+import static org.inici.JocDeRol.pos;
+
 public class Poders {
-    static ArrayList<org.Altres.Poders>llistaPoders = new ArrayList<>();
+    static public ArrayList<org.Altres.Poders>llistaPoders = new ArrayList<>();
 
     public static void menu(){
         String opcio;
         do {
             System.out.println("PODERS\n1. Crear\n2. Consultar\n3. Eliminar\n0. Eixir");
-            try {
-                opcio = Teclat.scString();
-            }
-            catch (Exception e){
-                System.out.println("Opcio incorrecta");
-                opcio="-1";
-            }
+            opcio = Teclat.scString();
             switch (opcio){
                 case "1":
                     crear();
@@ -41,10 +37,13 @@ public class Poders {
     public static void eliminar(){
         System.out.println("Quin poder vols eliminar?");
         consultar();
+        System.out.println("Introdueix el nom:");
+        String nom = Teclat.scString();
         try {
-            int opcio = org.teclat.Teclat.scInt() - 1;
-            llistaPoders.remove(opcio);
+            llistaPoders.remove(pos(nom,'P'));
         } catch (Exception e) {
+            Teclat.nl();
+            System.out.println("Poder no trobat");
             incorrecto(3);
         }
     }
@@ -88,4 +87,5 @@ public class Poders {
             }
         }
     }
+
 }
