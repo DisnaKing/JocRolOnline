@@ -1,23 +1,27 @@
 [
   {
-    "nom": "Pepe",
-    "puntsAtac": 30,
+    "nom": "paco",
+    "puntsAtac": 20,
     "puntsDefensa": 5,
     "vides": 100,
-    "poders": []
+    "equip": "Mondongers",
+    "poders": [],
+    "tipus": "Alien"
   },
   {
-    "nom": "Guillem",
+    "nom": "rob",
     "puntsAtac": 20,
-    "puntsDefensa": 10,
+    "puntsDefensa": 5,
     "vides": 100,
-    "poders": []
+    "poders": [],
+    "tipus": "Huma"
   },
   {
-    "nom": "Andreu",
-    "puntsAtac": 10,
-    "puntsDefensa": 10,
+    "nom": "mac",
+    "puntsAtac": 20,
+    "puntsDefensa": 5,
     "vides": 100,
-    "poders": []
+    "poders": [],
+    "tipus": "Guerrer"
   }
 ]

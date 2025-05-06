@@ -1,6 +1,7 @@
 package org.inici;
 
 import org.Altres.Partida.Partida;
+
 import org.personatges.Alien;
 import org.personatges.Guerrer;
 import org.personatges.Huma;
@@ -24,9 +25,20 @@ public class JocDeRol {
      * @param args Arguments de línia de comandaments (no utilitzats)
      */
     public static void main(String[] args) {
-        menuPartida();
+        //menuPartida();
+
         // TODO Arreglar Cargar partida
-        //partida();
+        prova();
+        partida();
+    }
+
+    public  static void prova(){
+        Alien rob = new Alien("paco", 20, 5, 100);
+        Huma humano = new Huma("rob", 20, 5, 100);
+        Guerrer guerrer = new Guerrer("mac", 20, 5, 100);
+        Jugadors.llistaJugadors.add(rob);
+        Jugadors.llistaJugadors.add(humano);
+        Jugadors.llistaJugadors.add(guerrer);
     }
 
     public static void menuPartida(){
@@ -74,7 +86,7 @@ public class JocDeRol {
         ArrayList<Jugador> jugadorsPartida = clonarLista(Jugadors.llistaJugadors);
 
         // Continuem fins que només quedi un jugador amb vida
-        while (jugadorsPartida.size()-1 > jugadorsMorts.size()) {
+        while (jugadorsPartida.size()-1 != jugadorsMorts.size()) {
             Random rand = new Random();
             Jugador atacant, atacat;
             int atacantRandom, atacatRandom;
@@ -117,7 +129,7 @@ public class JocDeRol {
         ArrayList<Jugador> jugadorsPartida = clonarLista(Jugadors.llistaJugadors);
 
 
-        while (jugadorsPartida.size() >= jugadorsMorts.size()) {
+        while (jugadorsPartida.size()-1 != jugadorsMorts.size()) {
             // Cada jugador viu realitza un atac per torn
             for (int i = 0; i < jugadorsPartida.size(); i++) {
                 Jugador atacant = jugadorsPartida.get(i);
@@ -259,7 +271,6 @@ public class JocDeRol {
                     menuPartida();
                     break;
                 case "2":
-                    System.out.println("Carregant partida");
                     System.out.println("En desenvolupament");
                     Partida.carregar();
                     menuPartida();

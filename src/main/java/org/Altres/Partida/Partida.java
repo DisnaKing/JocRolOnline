@@ -49,11 +49,10 @@ public class Partida {
     static public void carregar() {
         System.out.println("Carregant partida...");
 
-        Gson gson = null;
+        Gson gson;
         try {
 
             // Leer el archivo JSON
-            java.io.Reader reader = new java.io.FileReader("src/main/resources/Jugadors.json");
             gson = new Gson();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Jugadors.json"));
             String jsonContent = br.lines().collect(Collectors.joining());
@@ -65,21 +64,15 @@ public class Partida {
 
             for (JugadorSerializable js : jugadorsArray) {
                 // Creamos el jugador real (de momento sin equipo)
-                Jugador j;
-                switch (js.tipus) {
-                    case "Alien":
-                        j = new org.personatges.Alien(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
-                        break;
-                    case "Guerrer":
-                        j = new org.personatges.Guerrer(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
-                        break;
-                    case "Huma":
-                        j = new org.personatges.Huma(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
-                        break;
-                    default:
+                Jugador j = switch (js.tipus) {
+                    case "Alien" -> new org.personatges.Alien(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                    case "Guerrer" -> new org.personatges.Guerrer(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                    case "Huma" -> new org.personatges.Huma(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                    default -> {
                         System.out.println("Tipus desconegut: " + js.tipus + ". Creant com a Jugador.");
-                        j = new Jugador(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
-                }
+                        yield new Jugador(js.nom, js.puntsAtac, js.puntsDefensa, js.vides);
+                    }
+                };
                 // Copiamos los poders
                 for (Poders p : js.poders) {
                     j.posa(p);
@@ -99,12 +92,10 @@ public class Partida {
                             j.setEquip(equip);
                         }
                     }
-
-                    // Añadimos el jugador a la lista global
-                    org.inici.Jugadors.llistaJugadors.add(j);
-                    System.out.println("Partida carregada correctament.");
-
                 }
+                // Añadimos el jugador a la lista global
+                org.inici.Jugadors.llistaJugadors.add(j);
+                System.out.println("Partida carregada correctament.");
             }
         } catch (IOException e) {
             System.out.println("Hi han problemes al carregar la partida");

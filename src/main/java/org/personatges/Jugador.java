@@ -123,16 +123,21 @@ public class Jugador implements Cloneable, Serializable {
 
         int defensa = this.getPuntsDefensa() + sumaPodersJ1;
 
-        // Atac
-
-        System.out.println(this.nom+" es colpejat amb "+ puntsAtac +" i es defen amb "+this.getPuntsDefensa()+". Vides: "+this.getVides() +"- "+(puntsAtac-this.getPuntsDefensa())+" = "+(this.getVides()-(puntsAtac-defensa)));
+        int vidaResta = puntsAtac-defensa;
+        if (vidaResta<0) vidaResta=0;
 
         //Establim vides finals
         int videsFinals;
-        videsFinals = this.getVides()-(puntsAtac-defensa);
+        videsFinals = this.getVides()-vidaResta;
         // Comprovem que les vides no son negatives
         if (videsFinals < 0) {videsFinals = 0;}
         this.setVides(videsFinals);
+
+        // Atac
+
+        System.out.println(this.nom+" es colpejat amb "+ puntsAtac +" i es defen amb "+defensa+". Vides: "+ this.getVides() +"- "+vidaResta+" = "+videsFinals);
+
+
     }
 
     public int sumaPoders(){
